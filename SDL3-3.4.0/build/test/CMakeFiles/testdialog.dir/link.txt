@@ -1,0 +1,1 @@
+/usr/bin/cc -O2 -g -DNDEBUG -Wl,--dependency-file=CMakeFiles/testdialog.dir/link.d CMakeFiles/testdialog.dir/testdialog.c.o -o testdialog  -Wl,-rpath,/home/anson/Documents/IMAGE/SDL3-3.4.0/build ../libSDL3_test.a ../libSDL3.so.0.4.0

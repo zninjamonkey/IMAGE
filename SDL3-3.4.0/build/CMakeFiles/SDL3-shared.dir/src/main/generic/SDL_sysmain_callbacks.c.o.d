@@ -1,0 +1,14 @@
+CMakeFiles/SDL3-shared.dir/src/main/generic/SDL_sysmain_callbacks.c.o: \
+ /home/anson/Documents/IMAGE/SDL3-3.4.0/src/main/generic/SDL_sysmain_callbacks.c \
+ /usr/include/stdc-predef.h \
+ /home/anson/Documents/IMAGE/SDL3-3.4.0/src/SDL_internal.h \
+ /home/anson/Documents/IMAGE/SDL3-3.4.0/src/main/generic/../SDL_main_callbacks.h \
+ /home/anson/Documents/IMAGE/SDL3-3.4.0/src/main/generic/../../video/SDL_sysvideo.h \
+ /home/anson/Documents/IMAGE/SDL3-3.4.0/include/SDL3/SDL_vulkan.h \
+ /home/anson/Documents/IMAGE/SDL3-3.4.0/include/SDL3/SDL_stdinc.h \
+ /home/anson/Documents/IMAGE/SDL3-3.4.0/include/SDL3/SDL_error.h \
+ /home/anson/Documents/IMAGE/SDL3-3.4.0/include/SDL3/SDL_video.h \
+ /home/anson/Documents/IMAGE/SDL3-3.4.0/include/SDL3/SDL_begin_code.h \
+ /home/anson/Documents/IMAGE/SDL3-3.4.0/include/SDL3/SDL_close_code.h \
+ /home/anson/Documents/IMAGE/SDL3-3.4.0/src/main/generic/../../video/SDL_surface_c.h \
+ /home/anson/Documents/IMAGE/SDL3-3.4.0/src/main/generic/../../video/SDL_blit.h

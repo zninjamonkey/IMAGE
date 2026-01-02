@@ -1,0 +1,1 @@
+/usr/bin/cc -O2 -g -DNDEBUG -Wl,--dependency-file=CMakeFiles/testurl.dir/link.d CMakeFiles/testurl.dir/testurl.c.o -o testurl  -Wl,-rpath,/home/anson/Documents/IMAGE/SDL3-3.4.0/build ../libSDL3_test.a ../libSDL3.so.0.4.0

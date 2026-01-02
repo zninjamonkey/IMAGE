@@ -1,0 +1,1 @@
+/usr/bin/cc -O2 -g -DNDEBUG -Wl,--dependency-file=CMakeFiles/testcontroller.dir/link.d CMakeFiles/testcontroller.dir/testcontroller.c.o CMakeFiles/testcontroller.dir/gamepadutils.c.o CMakeFiles/sdltests_utils.dir/testutils.c.o -o testcontroller  -Wl,-rpath,/home/anson/Documents/IMAGE/SDL3-3.4.0/build ../libSDL3_test.a ../libSDL3.so.0.4.0

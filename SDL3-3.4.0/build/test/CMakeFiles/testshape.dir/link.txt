@@ -1,0 +1,1 @@
+/usr/bin/cc -O2 -g -DNDEBUG -Wl,--dependency-file=CMakeFiles/testshape.dir/link.d CMakeFiles/testshape.dir/testshape.c.o -o testshape  -Wl,-rpath,/home/anson/Documents/IMAGE/SDL3-3.4.0/build ../libSDL3_test.a ../libSDL3.so.0.4.0

@@ -1,0 +1,14 @@
+CMakeFiles/SDL3-shared.dir/src/gpu/SDL_gpu.c.o: \
+ /home/anson/Documents/IMAGE/SDL3-3.4.0/src/gpu/SDL_gpu.c \
+ /usr/include/stdc-predef.h \
+ /home/anson/Documents/IMAGE/SDL3-3.4.0/src/SDL_internal.h \
+ /home/anson/Documents/IMAGE/SDL3-3.4.0/src/gpu/SDL_sysgpu.h \
+ /home/anson/Documents/IMAGE/SDL3-3.4.0/src/gpu/../video/SDL_sysvideo.h \
+ /home/anson/Documents/IMAGE/SDL3-3.4.0/include/SDL3/SDL_vulkan.h \
+ /home/anson/Documents/IMAGE/SDL3-3.4.0/include/SDL3/SDL_stdinc.h \
+ /home/anson/Documents/IMAGE/SDL3-3.4.0/include/SDL3/SDL_error.h \
+ /home/anson/Documents/IMAGE/SDL3-3.4.0/include/SDL3/SDL_video.h \
+ /home/anson/Documents/IMAGE/SDL3-3.4.0/include/SDL3/SDL_begin_code.h \
+ /home/anson/Documents/IMAGE/SDL3-3.4.0/include/SDL3/SDL_close_code.h \
+ /home/anson/Documents/IMAGE/SDL3-3.4.0/src/gpu/../video/SDL_surface_c.h \
+ /home/anson/Documents/IMAGE/SDL3-3.4.0/src/gpu/../video/SDL_blit.h

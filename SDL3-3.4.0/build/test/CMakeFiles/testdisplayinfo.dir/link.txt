@@ -1,0 +1,1 @@
+/usr/bin/cc -O2 -g -DNDEBUG -Wl,--dependency-file=CMakeFiles/testdisplayinfo.dir/link.d CMakeFiles/testdisplayinfo.dir/testdisplayinfo.c.o -o testdisplayinfo  -Wl,-rpath,/home/anson/Documents/IMAGE/SDL3-3.4.0/build ../libSDL3_test.a ../libSDL3.so.0.4.0

@@ -1,0 +1,8 @@
+CMakeFiles/SDL3-shared.dir/src/events/SDL_keysym_to_keycode.c.o: \
+ /home/anson/Documents/IMAGE/SDL3-3.4.0/src/events/SDL_keysym_to_keycode.c \
+ /usr/include/stdc-predef.h \
+ /home/anson/Documents/IMAGE/SDL3-3.4.0/src/SDL_internal.h \
+ /home/anson/Documents/IMAGE/SDL3-3.4.0/src/events/SDL_keyboard_c.h \
+ /home/anson/Documents/IMAGE/SDL3-3.4.0/src/events/SDL_keymap_c.h \
+ /home/anson/Documents/IMAGE/SDL3-3.4.0/src/events/SDL_keysym_to_scancode_c.h \
+ /home/anson/Documents/IMAGE/SDL3-3.4.0/src/events/imKStoUCS.h

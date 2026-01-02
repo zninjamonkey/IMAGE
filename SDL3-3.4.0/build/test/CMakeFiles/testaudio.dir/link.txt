@@ -1,0 +1,1 @@
+/usr/bin/cc -O2 -g -DNDEBUG -Wl,--dependency-file=CMakeFiles/testaudio.dir/link.d CMakeFiles/testaudio.dir/testaudio.c.o CMakeFiles/sdltests_utils.dir/testutils.c.o -o testaudio  -Wl,-rpath,/home/anson/Documents/IMAGE/SDL3-3.4.0/build ../libSDL3_test.a ../libSDL3.so.0.4.0
