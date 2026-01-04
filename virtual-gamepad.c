@@ -3,6 +3,12 @@
 #include <linux/uinput.h>
 #include <fcntl.h>  
 
+struct inputStatus
+{
+   /* data */
+};
+
+
 void emit(int fd, int type, int code, int val)
 {
    struct input_event ie;
@@ -16,6 +22,8 @@ void emit(int fd, int type, int code, int val)
 
    write(fd, &ie, sizeof(ie));
 }
+
+
 
 void configureInputEvents(int uinputFile, int* eventCodes)
 {
@@ -65,7 +73,7 @@ int main(void)
    usetup.id.bustype = BUS_USB;
    usetup.id.vendor = 0x1234; /* sample vendor */
    usetup.id.product = 0x5678; /* sample product */
-   strcpy(usetup.name, "Virtual Gamepad");
+   strcpy(usetup.name, "Generic Virtual Gamepad");
 
    ioctl(fd, UI_DEV_SETUP, &usetup);
    ioctl(fd, UI_DEV_CREATE);
@@ -90,6 +98,16 @@ int main(void)
    // emit(fd, EV_SYN, SYN_REPORT, 0);
    // emit(fd, EV_KEY, KEY_TOUCHPAD_TOGGLE, 0);
    // emit(fd, EV_SYN, SYN_REPORT, 0);
+
+   while (1){
+
+      updateInput();
+
+      applyInput(inputStatus);
+
+      usleep(2 * 1000); //500hz polling
+   }
+
    for(int i = 0; i < 20; i++){
       emit(fd, EV_KEY, BTN_SOUTH, 1);
       emit(fd, EV_SYN, SYN_REPORT, 0);
