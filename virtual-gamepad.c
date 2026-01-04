@@ -44,6 +44,11 @@ void emit(int fd, int type, int code, int val)
    write(fd, &ie, sizeof(ie));
 }
 
+void inputEventRecieved()
+{
+   
+}
+
 void updateInput(struct GampadStatus state)
 {
 
