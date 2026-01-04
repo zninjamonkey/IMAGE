@@ -3,11 +3,32 @@
 #include <linux/uinput.h>
 #include <fcntl.h>  
 
-struct inputStatus
+struct GampadStatus
 {
    /* data */
-};
+   int btnA;
+   int btnB;
+   int btnY;
+   int btnX;
 
+   float rTrig;
+   int rBtn;
+   float lTrig;
+   int lBtn;
+
+   int rSBtn;
+   int lSBtn;
+
+   float rStkX;
+   float rStkY;
+   float lStkX;
+   float lStkY;
+
+   int rDP;
+   int lDP;
+   int uDP;
+   int dDp;
+};
 
 void emit(int fd, int type, int code, int val)
 {
@@ -23,6 +44,17 @@ void emit(int fd, int type, int code, int val)
    write(fd, &ie, sizeof(ie));
 }
 
+void updateInput(struct GampadStatus state)
+{
+
+}
+
+void applyInput(int fd, struct GampadStatus state)
+{
+   emit(fd, EV_KEY, BTN_SOUTH, 1);
+   emit(fd, EV_SYN, SYN_REPORT, 0);
+
+}
 
 
 void configureInputEvents(int uinputFile, int* eventCodes)
@@ -78,6 +110,9 @@ int main(void)
    ioctl(fd, UI_DEV_SETUP, &usetup);
    ioctl(fd, UI_DEV_CREATE);
 
+   struct GampadStatus gPadState;
+   
+
    /*
     * On UI_DEV_CREATE the kernel will create the device node for this
     * device. We are inserting a pause here so that userspace has time
@@ -101,9 +136,9 @@ int main(void)
 
    while (1){
 
-      updateInput();
+      updateInputState(gPadState);
 
-      applyInput(inputStatus);
+      applyInput(fd, gPadState);
 
       usleep(2 * 1000); //500hz polling
    }
