@@ -103,7 +103,7 @@ void createDevice()
    ABS_RY     //RS Y
    };
 
-   ioctl(codes, UI_SET_EVBIT, EV_KEY);
+   ioctl(fd, UI_SET_EVBIT, EV_KEY);
    ioctl(fd, UI_SET_EVBIT, EV_ABS);
    for (int i = 0; i < sizeof(codes) / sizeof(codes[0]); i++){
       ioctl(fd, UI_SET_KEYBIT, codes[i]);
