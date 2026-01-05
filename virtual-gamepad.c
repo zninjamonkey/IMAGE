@@ -3,9 +3,10 @@
 #include <linux/uinput.h>
 #include <fcntl.h>  
 
+int fd;
+
 struct GampadStatus
 {
-   /* data */
    int btnA;
    int btnB;
    int btnY;
@@ -44,38 +45,36 @@ void emit(int fd, int type, int code, int val)
    write(fd, &ie, sizeof(ie));
 }
 
-void inputEventRecieved()
-{
+
+// this stuff will be done with sdl
+// void inputEventRecieved()
+// {
    
-}
+// }
 
-void updateInput(struct GampadStatus state)
+// void updateInput(struct GampadStatus state)
+// {
+
+// }
+
+void applyInputState(struct GampadStatus state)
 {
-
-}
-
-void applyInput(int fd, struct GampadStatus state)
-{
-   emit(fd, EV_KEY, BTN_SOUTH, 1);
+   emit(fd, EV_KEY, BTN_SOUTH, state.btnA);
+   emit(fd, EV_SYN, SYN_REPORT, 0);
+   emit(fd, EV_KEY, BTN_EAST, state.btnB);
+   emit(fd, EV_SYN, SYN_REPORT, 0);
+   emit(fd, EV_KEY, BTN_NORTH, state.btnY);
+   emit(fd, EV_SYN, SYN_REPORT, 0);
+   emit(fd, EV_KEY, BTN_WEST, state.btnX);
    emit(fd, EV_SYN, SYN_REPORT, 0);
 
 }
 
-
-void configureInputEvents(int uinputFile, int* eventCodes)
-{
-   ioctl(uinputFile, UI_SET_EVBIT, EV_KEY);
-   ioctl(uinputFile, UI_SET_EVBIT, EV_ABS);
-   for (int i = 0; i < sizeof(eventCodes) / sizeof(eventCodes[0]); i++){
-      ioctl(uinputFile, UI_SET_KEYBIT, eventCodes[i]);
-   }
-}
-
-int main(void)
+void createDevice()
 {
    struct uinput_setup usetup;
 
-   int fd = open("/dev/uinput", O_WRONLY | O_NONBLOCK);
+   fd = open("/dev/uinput", O_WRONLY | O_NONBLOCK);
 
 
    int codes[] = 
@@ -104,7 +103,11 @@ int main(void)
    ABS_RY     //RS Y
    };
 
-   configureInputEvents(fd, codes);
+   ioctl(codes, UI_SET_EVBIT, EV_KEY);
+   ioctl(fd, UI_SET_EVBIT, EV_ABS);
+   for (int i = 0; i < sizeof(codes) / sizeof(codes[0]); i++){
+      ioctl(fd, UI_SET_KEYBIT, codes[i]);
+   }
 
    memset(&usetup, 0, sizeof(usetup));
    usetup.id.bustype = BUS_USB;
@@ -125,8 +128,18 @@ int main(void)
     * the event, otherwise it will not notice the event we are about
     * to send. This pause is only needed in our example code!
     */
-//    sleep(1);
    usleep(200 * 1000);
+}
+
+void cleanUp() {
+   sleep(1);
+   ioctl(fd, UI_DEV_DESTROY);
+   close(fd);
+}
+
+// int main(void)
+// {
+
 
    /* Key press, report the event, send key release, and report again */
    // emit(fd, EV_KEY, KEY_TOUCHPAD_TOGGLE, 1);
@@ -139,31 +152,18 @@ int main(void)
    // emit(fd, EV_KEY, KEY_TOUCHPAD_TOGGLE, 0);
    // emit(fd, EV_SYN, SYN_REPORT, 0);
 
-   while (1){
+   // for(int i = 0; i < 20; i++){
+   //    emit(fd, EV_KEY, BTN_SOUTH, 1);
+   //    emit(fd, EV_SYN, SYN_REPORT, 0);
+   //    sleep(1);
+   //    emit(fd, EV_KEY, BTN_SOUTH, 0);
+   //    emit(fd, EV_SYN, SYN_REPORT, 0);
+   //    sleep(1);
+   // }
 
-      updateInputState(gPadState);
-
-      applyInput(fd, gPadState);
-
-      usleep(2 * 1000); //500hz polling
-   }
-
-   for(int i = 0; i < 20; i++){
-      emit(fd, EV_KEY, BTN_SOUTH, 1);
-      emit(fd, EV_SYN, SYN_REPORT, 0);
-      sleep(1);
-      emit(fd, EV_KEY, BTN_SOUTH, 0);
-      emit(fd, EV_SYN, SYN_REPORT, 0);
-      sleep(1);
-   }
    /*
     * Give userspace some time to read the events before we destroy the
     * device with UI_DEV_DESTOY.
     */
-   sleep(1);
-
-   ioctl(fd, UI_DEV_DESTROY);
-   close(fd);
-
-   return 0;
-}
+   // return 0;
+// }
