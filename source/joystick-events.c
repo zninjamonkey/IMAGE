@@ -22,6 +22,8 @@
 #include <SDL3/SDL.h>
 #include <SDL3/SDL_main.h>
 
+#include "virtual-gamepad.h"
+
 /* We will use this renderer to draw into this window every frame. */
 static SDL_Window *window = NULL;
 static SDL_Renderer *renderer = NULL;
@@ -105,6 +107,8 @@ static void add_message(SDL_JoystickID jid, const char *fmt, ...)
 SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
 {
     int i;
+
+    createDevice();
 
     SDL_SetAppMetadata("Example Input Joystick Events", "1.0", "com.example.input-joystick-events");
 
