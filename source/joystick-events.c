@@ -21,6 +21,7 @@
 #define SDL_MAIN_USE_CALLBACKS 1  /* use the callbacks instead of main() */
 #include <SDL3/SDL.h>
 #include <SDL3/SDL_main.h>
+#include <stdio.h>
 
 #include "virtual-gamepad.h"
 
@@ -38,6 +39,9 @@ typedef struct EventMessage
     Uint64 start_ticks;
     struct EventMessage *next;
 } EventMessage;
+
+
+struct GampadStatus joystickState;
 
 static EventMessage messages;
 static EventMessage *messages_tail = &messages;
@@ -108,7 +112,8 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
 {
     int i;
 
-    createDevice();
+    // createDevice();
+    printf("set hint output: %d\n", SDL_SetHintWithPriority("SDL_HINT_JOYSTICK_ALLOW_BACKGROUND_EVENTS", "1", SDL_HINT_OVERRIDE));
 
     SDL_SetAppMetadata("Example Input Joystick Events", "1.0", "com.example.input-joystick-events");
 
@@ -131,6 +136,7 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
     }
 
     add_message(0, "Please plug in a joystick.");
+    
 
     return SDL_APP_CONTINUE;  /* carry on with the program! */
 }
