@@ -5,12 +5,34 @@
 #include <fcntl.h>  
 // #include <linux/joystick.h>
 
+#include "virtual-gamepad.h"
+
+#define JS_EVENT_BUTTON         0x01    /* button pressed/released */
+#define JS_EVENT_AXIS           0x02    /* joystick moved */
+#define JS_EVENT_INIT           0x80    /* initial state of device */
+
 struct js_event {
         __u32 time;     /* event timestamp in milliseconds */
         __s16 value;    /* value */
         __u8 type;      /* event type */
         __u8 number;    /* axis/button number */
 };
+
+struct GamepadStatus gpad_state;
+
+void update_state()
+{
+    
+}
+
+void handle_event(struct js_event e)
+{
+    // e.type &= ~JS_EVENT_INIT
+    if(e.type == JS_EVENT_INIT)
+    {
+        int subtype = e.type & ~JS_EVENT_INIT;
+    }
+}
 
 void main()
 {
@@ -19,7 +41,10 @@ void main()
 
     while (1)
     {
-        read(fd, &e, sizeof(e));
+        while(read(fd, &e, sizeof(e)) > 0) {
+            handle_event(e);
+        }
+        
         printf("number: %d\n",e.number);
         printf("value: %d\n",e.value);
         printf("time: %d\n",e.time);
