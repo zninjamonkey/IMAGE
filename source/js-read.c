@@ -47,17 +47,17 @@ void main()
 
     while (1)
     {
-        while(read(fd, &e, sizeof(e)) > 0) {
-            handle_event(e);
-        }
+        // while(read(fd, &e, sizeof(e)) > 0) {
+        //     handle_event(e);
+        // }
         // handle_event(e);
-        // int wtffff = read(fd, &e, sizeof(e));
+        int wtffff = read(fd, &e, sizeof(e));
 
-        // printf("read return value: %d\n", wtffff);
+        printf("read return value: %d\n", wtffff);
         printf("number: %d\n",e.number);
         printf("value: %d\n",e.value);
         printf("time: %d\n",e.time);
         printf("type: %d\n",e.type);
-        usleep(20*1000);
+        usleep(1*1000);
     }
 }
