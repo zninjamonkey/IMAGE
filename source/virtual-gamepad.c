@@ -5,7 +5,7 @@
 
 int fd;
 
-struct GampadStatus
+struct GamepadStatus
 {
    int btnA;
    int btnB;
@@ -57,7 +57,7 @@ void emit(int fd, int type, int code, int val)
 
 // }
 
-void applyInputState(struct GampadStatus state)
+void applyInputState(struct GamepadStatus state)
 {
    emit(fd, EV_KEY, BTN_SOUTH, state.btnA);
    emit(fd, EV_SYN, SYN_REPORT, 0);
@@ -118,7 +118,7 @@ void createDevice()
    ioctl(fd, UI_DEV_SETUP, &usetup);
    ioctl(fd, UI_DEV_CREATE);
 
-   struct GampadStatus gPadState;
+   struct GamepadStatus gPadState;
    
 
    /*

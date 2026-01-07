@@ -1,7 +1,7 @@
 #ifndef VIRTUAL_GAMEPAD_H
 #define VIRTUAL_GAMEPAD_H
 
-struct GampadStatus
+struct GamepadStatus
 {
    int btnA;
    int btnB;
@@ -27,7 +27,7 @@ struct GampadStatus
    int dDp;
 };
 
-void applyInputState(struct GampadStatus state);
+void applyInputState(struct GamepadStatus state);
 
 void createDevice();
 

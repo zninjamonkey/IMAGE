@@ -18,19 +18,25 @@ struct js_event {
         __u8 number;    /* axis/button number */
 };
 
-struct GamepadStatus gpad_state;
+// struct GamepadStatus gpad_state;
 
-void update_state()
-{
+// void update_state()
+// {
     
-}
+// }
 
 void handle_event(struct js_event e)
 {
     // e.type &= ~JS_EVENT_INIT
+    printf("%d\n", e.type);
     if(e.type == JS_EVENT_INIT)
     {
         int subtype = e.type & ~JS_EVENT_INIT;
+        printf("subtype: %d", subtype);
+    }
+    if(e.type == JS_EVENT_BUTTON)
+    {
+        printf("button: %d", e.type);
     }
 }
 
@@ -44,7 +50,10 @@ void main()
         while(read(fd, &e, sizeof(e)) > 0) {
             handle_event(e);
         }
-        
+        // handle_event(e);
+        // int wtffff = read(fd, &e, sizeof(e));
+
+        // printf("read return value: %d\n", wtffff);
         printf("number: %d\n",e.number);
         printf("value: %d\n",e.value);
         printf("time: %d\n",e.time);
