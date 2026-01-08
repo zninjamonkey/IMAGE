@@ -6,6 +6,7 @@
 // #include <linux/joystick.h>
 
 #include "virtual-gamepad.h"
+#include "button-definitions.h"
 
 #define JS_EVENT_BUTTON         0x01    /* button pressed/released */
 #define JS_EVENT_AXIS           0x02    /* joystick moved */
@@ -18,7 +19,7 @@ struct js_event {
         __u8 number;    /* axis/button number */
 };
 
-// struct GamepadStatus gpad_state;
+struct GamepadStatus gpad_state;
 
 // void update_state()
 // {
@@ -28,16 +29,48 @@ struct js_event {
 void handle_event(struct js_event e)
 {
     // e.type &= ~JS_EVENT_INIT
-    printf("%d\n", e.type);
-    if(e.type == JS_EVENT_INIT)
+    // printf("%d\n", e.type);
+
+    switch(e.type)
     {
-        int subtype = e.type & ~JS_EVENT_INIT;
-        printf("subtype: %d", subtype);
+        case JS_EVENT_INIT | JS_EVENT_BUTTON:
+
+            // int subtype = JS_EVENT_BUTTON;
+            printf("INIT BUTTON\n");
+            switch(e.number)
+            {
+                case INP_A:
+                    printf("initial A button: %d\n", e.value);
+                    break;
+                case INP_B:
+                    printf("initial B button: %d\n", e.value);
+                    break;
+                case INP_X:
+                    printf("initial X button: %d\n", e.value);
+                    break;
+                case INP_Y:
+                    printf("initial Y button: %d\n", e.value);
+                    break;
+            }
+            break;
+    
+        case JS_EVENT_INIT | JS_EVENT_AXIS:
+        
+            // int subtype = JS_EVENT_AXIS;
+            printf("INIT AXIS\n");
+            break;
+    
+        case JS_EVENT_BUTTON:
+
+            // printf("button: %d\n", e.number);
+            break;
+
+        case JS_EVENT_AXIS:
+    
+            // printf("button: %d\n", e.number);
+            break;
     }
-    if(e.type == JS_EVENT_BUTTON)
-    {
-        printf("button: %d", e.type);
-    }
+    
 }
 
 void main()
@@ -47,17 +80,17 @@ void main()
 
     while (1)
     {
-        // while(read(fd, &e, sizeof(e)) > 0) {
-        //     handle_event(e);
-        // }
+        while(read(fd, &e, sizeof(e)) > 0) {
+            handle_event(e);
+        }
         // handle_event(e);
-        int wtffff = read(fd, &e, sizeof(e));
+        // int wtffff = read(fd, &e, sizeof(e));
 
-        printf("read return value: %d\n", wtffff);
-        printf("number: %d\n",e.number);
-        printf("value: %d\n",e.value);
-        printf("time: %d\n",e.time);
-        printf("type: %d\n",e.type);
+        // printf("read return value: %d\n", wtffff);
+        // printf("number: %d\n",e.number);
+        // printf("value: %d\n",e.value);
+        // printf("time: %d\n",e.time);
+        // printf("type: %d\n",e.type);
         usleep(1*1000);
     }
 }
