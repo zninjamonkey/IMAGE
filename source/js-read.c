@@ -42,7 +42,7 @@ void handle_event(struct js_event e)
 
 void main()
 {
-    int fd = open("/dev/input/js0", O_RDONLY);
+    int fd = open("/dev/input/js0", O_NONBLOCK);
     struct js_event e;
 
     while (1)
