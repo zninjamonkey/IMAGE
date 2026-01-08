@@ -6,7 +6,7 @@
 // #include <linux/joystick.h>
 
 #include "virtual-gamepad.h"
-#include "button-definitions.h"
+#include "input-definitions.h"
 
 #define JS_EVENT_BUTTON         0x01    /* button pressed/released */
 #define JS_EVENT_AXIS           0x02    /* joystick moved */
@@ -58,6 +58,21 @@ void handle_event(struct js_event e)
         
             // int subtype = JS_EVENT_AXIS;
             printf("INIT AXIS\n");
+            switch(e.number)
+            {
+                case INP_LEFT_X_AXIS:
+                    printf("initial left x: %d\n", e.value);
+                    break;
+                case INP_LEFT_Y_AXIS:
+                    printf("initial left y: %d\n", e.value);
+                    break;
+                case INP_RIGHT_X_AXIS:
+                    printf("initial right x: %d\n", e.value);
+                    break;
+                case INP_RIGHT_Y_AXIS:
+                    printf("initial right y: %d\n", e.value);
+                    break;
+            }
             break;
     
         case JS_EVENT_BUTTON:
