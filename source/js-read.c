@@ -41,21 +41,27 @@ void handle_event(struct js_event e)
             {
                 case INP_A:
                     printf("initial A button: %d\n", e.value);
+                    gpad_state.btnA = e.value;
                     break;
                 case INP_B:
                     printf("initial B button: %d\n", e.value);
+                    gpad_state.btnB = e.value;
                     break;
                 case INP_X:
                     printf("initial X button: %d\n", e.value);
+                    gpad_state.btnX = e.value;
                     break;
                 case INP_Y:
                     printf("initial Y button: %d\n", e.value);
+                    gpad_state.btnY = e.value;
                     break;
                 case INP_RIGHT_BUMPER:
                     printf("initial right bumper: %d\n", e.value);
+                    gpad_state.rBtn = e.value;
                     break;
                 case INP_LEFT_BUMPER:
                     printf("initial left bumper: %d\n", e.value);
+                    gpad_state.lBtn = e.value;
                     break;
                 case INP_SELECT:
                     printf("initial select: %d\n", e.value);
@@ -68,9 +74,11 @@ void handle_event(struct js_event e)
                     break;
                 case INP_RIGHT_STICK:
                     printf("initial RS: %d\n", e.value);
+                    gpad_state.rSBtn = e.value;
                     break;
                 case INP_LEFT_STICK:
                     printf("initial LS: %d\n", e.value);
+                    gpad_state.lSBtn = e.value;
                     break;
             }
             break;
@@ -83,26 +91,36 @@ void handle_event(struct js_event e)
             {
                 case INP_LEFT_X_AXIS:
                     printf("initial left x: %d\n", e.value);
+                    gpad_state.lStkX = e.value;
                     break;
                 case INP_LEFT_Y_AXIS:
                     printf("initial left y: %d\n", e.value);
+                    gpad_state.lStkY = e.value;
                     break;
                 case INP_RIGHT_X_AXIS:
                     printf("initial right x: %d\n", e.value);
+                    gpad_state.rStkX = e.value;
                     break;
                 case INP_RIGHT_Y_AXIS:
                     printf("initial right y: %d\n", e.value);
+                    gpad_state.rStkY = e.value;
                     break;
                 case INP_RIGHT_TRIGGER:
                     printf("initial rt: %d\n", e.value);
+                    gpad_state.lTrig = e.value;
                     break;
                 case INP_LEFT_TRIGGER:
+                    gpad_state.rTrig = e.value;
                     printf("initial lt: %d\n", e.value);
                     break;
                 case INP_DPAD_X:
+                    gpad_state.lDP = e.value < 0;
+                    gpad_state.rDP = e.value > 0;
                     printf("initial dpx: %d\n", e.value);
                     break;
                 case INP_DPAD_Y:
+                    gpad_state.uDP = e.value < 0;
+                    gpad_state.dDp = e.value > 0;
                     printf("initial dpy: %d\n", e.value);
                     break;
             }
@@ -115,7 +133,36 @@ void handle_event(struct js_event e)
 
         case JS_EVENT_AXIS:
     
-            printf("axis: %d\n", e.number);
+            // printf("axis: %d\n", e.number);
+            switch(e.number)
+            {
+                case INP_LEFT_X_AXIS:
+                    gpad_state.lStkX = e.value;
+                    break;
+                case INP_LEFT_Y_AXIS:
+                    gpad_state.lStkY = e.value;
+                    break;
+                case INP_RIGHT_X_AXIS:
+                    gpad_state.rStkX = e.value;
+                    break;
+                case INP_RIGHT_Y_AXIS:
+                    gpad_state.rStkY = e.value;
+                    break;
+                case INP_RIGHT_TRIGGER:
+                    gpad_state.lTrig = e.value;
+                    break;
+                case INP_LEFT_TRIGGER:
+                    gpad_state.rTrig = e.value;
+                    break;
+                case INP_DPAD_X:
+                    gpad_state.lDP = e.value < 0;
+                    gpad_state.rDP = e.value > 0;
+                    break;
+                case INP_DPAD_Y:
+                    gpad_state.uDP = e.value < 0;
+                    gpad_state.dDp = e.value > 0;
+                    break;
+            }
             break;
     }
     
@@ -131,6 +178,8 @@ void main()
         while(read(fd, &e, sizeof(e)) > 0) {
             handle_event(e);
         }
+
+        printf("%d\n", gpad_state.dDp);
         // handle_event(e);
         // int wtffff = read(fd, &e, sizeof(e));
 
