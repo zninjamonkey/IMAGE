@@ -8,6 +8,13 @@ struct GamepadStatus
    int btnY;
    int btnX;
 
+   int btnSel;
+   int btnSta;
+   int btnMen;
+
+   int rBump;
+   int lBump;
+
    float rTrig;
    int rBtn;
    float lTrig;
