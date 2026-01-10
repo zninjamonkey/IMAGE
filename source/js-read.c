@@ -51,6 +51,27 @@ void handle_event(struct js_event e)
                 case INP_Y:
                     printf("initial Y button: %d\n", e.value);
                     break;
+                case INP_RIGHT_BUMPER:
+                    printf("initial right bumper: %d\n", e.value);
+                    break;
+                case INP_LEFT_BUMPER:
+                    printf("initial left bumper: %d\n", e.value);
+                    break;
+                case INP_SELECT:
+                    printf("initial select: %d\n", e.value);
+                    break;
+                case INP_START:
+                    printf("initial start: %d\n", e.value);
+                    break;
+                case INP_MENU:
+                    printf("initial MENU: %d\n", e.value);
+                    break;
+                case INP_RIGHT_STICK:
+                    printf("initial RS: %d\n", e.value);
+                    break;
+                case INP_LEFT_STICK:
+                    printf("initial LS: %d\n", e.value);
+                    break;
             }
             break;
     
@@ -72,17 +93,29 @@ void handle_event(struct js_event e)
                 case INP_RIGHT_Y_AXIS:
                     printf("initial right y: %d\n", e.value);
                     break;
+                case INP_RIGHT_TRIGGER:
+                    printf("initial rt: %d\n", e.value);
+                    break;
+                case INP_LEFT_TRIGGER:
+                    printf("initial lt: %d\n", e.value);
+                    break;
+                case INP_DPAD_X:
+                    printf("initial dpx: %d\n", e.value);
+                    break;
+                case INP_DPAD_Y:
+                    printf("initial dpy: %d\n", e.value);
+                    break;
             }
             break;
     
         case JS_EVENT_BUTTON:
 
-            // printf("button: %d\n", e.number);
+            printf("button: %d\n", e.number);
             break;
 
         case JS_EVENT_AXIS:
     
-            // printf("button: %d\n", e.number);
+            printf("axis: %d\n", e.number);
             break;
     }
     
