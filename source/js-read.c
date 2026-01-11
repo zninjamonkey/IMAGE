@@ -65,12 +65,15 @@ void handle_event(struct js_event e)
                     break;
                 case INP_SELECT:
                     printf("initial select: %d\n", e.value);
+                    gpad_state.btnSel = e.value;
                     break;
                 case INP_START:
                     printf("initial start: %d\n", e.value);
+                    gpad_state.btnSta = e.value;
                     break;
                 case INP_MENU:
                     printf("initial MENU: %d\n", e.value);
+                    gpad_state.btnMen = e.value;
                     break;
                 case INP_RIGHT_STICK:
                     printf("initial RS: %d\n", e.value);
@@ -129,7 +132,42 @@ void handle_event(struct js_event e)
         case JS_EVENT_BUTTON:
 
             printf("button: %d\n", e.number);
-            break;
+            switch(e.number)
+            {
+                case INP_A:
+                    gpad_state.btnA = e.value;
+                    break;
+                case INP_B:
+                    gpad_state.btnB = e.value;
+                    break;
+                case INP_X:
+                    gpad_state.btnX = e.value;
+                    break;
+                case INP_Y:
+                    gpad_state.btnY = e.value;
+                    break;
+                case INP_RIGHT_BUMPER:
+                    gpad_state.rBump = e.value;
+                    break;
+                case INP_LEFT_BUMPER:
+                    gpad_state.lBump = e.value;
+                    break;
+                case INP_SELECT:
+                    gpad_state.btnSel = e.value;
+                    break;
+                case INP_START:
+                    gpad_state.btnSta = e.value;
+                    break;
+                case INP_MENU:
+                    gpad_state.btnMen = e.value;
+                    break;
+                case INP_RIGHT_STICK:
+                    gpad_state.rSBtn = e.value;
+                    break;
+                case INP_LEFT_STICK:
+                    gpad_state.lSBtn = e.value;
+                    break;
+            }
 
         case JS_EVENT_AXIS:
     
@@ -179,7 +217,7 @@ void main()
             handle_event(e);
         }
 
-        printf("%d\n", gpad_state.dDp);
+        printf("%d\n", gpad_state.btnX);
         // handle_event(e);
         // int wtffff = read(fd, &e, sizeof(e));
 

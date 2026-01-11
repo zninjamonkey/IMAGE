@@ -6,7 +6,7 @@
 #define INP_X               3
 #define INP_Y               4
 
-#define INP_RIGHT_BUMPER    5
+#define INP_RIGHT_BUMPER    7
 #define INP_LEFT_BUMPER     6
 
 #define INP_SELECT          10
