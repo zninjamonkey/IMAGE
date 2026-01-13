@@ -99,13 +99,13 @@ void applyInputState(struct GamepadStatus state)
    emit(fd, EV_SYN, SYN_REPORT, 0);
 
    printf("lstkx: %f\n", state.lStkX);
-   emit(fd, EV_ABS, ABS_X, state.lStkX);
+   emit(fd, EV_ABS, ABS_X, (int)state.lStkX);
    emit(fd, EV_SYN, SYN_REPORT, 0);
-   emit(fd, EV_ABS, ABS_Y, state.lStkY);
+   emit(fd, EV_ABS, ABS_Y, (int)state.lStkY);
    emit(fd, EV_SYN, SYN_REPORT, 0);
-   emit(fd, EV_ABS, ABS_RX, state.rStkX);
+   emit(fd, EV_ABS, ABS_RX, (int)state.rStkX);
    emit(fd, EV_SYN, SYN_REPORT, 0);
-   emit(fd, EV_ABS, ABS_RY, state.rStkY);
+   emit(fd, EV_ABS, ABS_RY, (int)state.rStkY);
    emit(fd, EV_SYN, SYN_REPORT, 0);
 
 }
@@ -117,7 +117,7 @@ void createDevice()
    fd = open("/dev/uinput", O_WRONLY | O_NONBLOCK);
 
 
-   int codes[] = 
+   int btn_codes[] = 
    {
    BTN_SOUTH,      //A
    BTN_EAST,      //B
@@ -136,6 +136,10 @@ void createDevice()
    BTN_TL,      //Binary LTrigger
    BTN_TR2,      //Binary Lower RTrigger
    BTN_TL2,      //Binary Lower LTrigger
+   };
+
+   int axis_codes[] = 
+   {
    ABS_HAT1X,      //Analog RTrigger
    ABS_HAT1Y,      //Analog LTrigger
    ABS_HAT2X,      //Analog Lower RTrigger
@@ -146,10 +150,15 @@ void createDevice()
    ABS_RY     //RS Y
    };
 
+
    ioctl(fd, UI_SET_EVBIT, EV_KEY);
    ioctl(fd, UI_SET_EVBIT, EV_ABS);
-   for (int i = 0; i < sizeof(codes) / sizeof(codes[0]); i++){
-      ioctl(fd, UI_SET_KEYBIT, codes[i]);
+   for (int i = 0; i < sizeof(btn_codes) / sizeof(btn_codes[0]); i++){
+      ioctl(fd, UI_SET_KEYBIT, btn_codes[i]);
+   }
+
+   for (int i = 0; i < sizeof(axis_codes) / sizeof(axis_codes[0]); i++){
+      ioctl(fd, UI_SET_ABSBIT, axis_codes[i]);
    }
 
    memset(&usetup, 0, sizeof(usetup));
