@@ -2,6 +2,7 @@
 #include <string.h>
 #include <linux/uinput.h>
 #include <fcntl.h>  
+#include <stdio.h>
 
 int fd;
 
@@ -74,6 +75,38 @@ void applyInputState(struct GamepadStatus state)
    emit(fd, EV_SYN, SYN_REPORT, 0);
    emit(fd, EV_KEY, BTN_WEST, state.btnX);
    emit(fd, EV_SYN, SYN_REPORT, 0);
+   emit(fd, EV_KEY, BTN_TL2, state.lBump);
+   emit(fd, EV_SYN, SYN_REPORT, 0);
+   emit(fd, EV_KEY, BTN_TR2, state.rBump);
+   emit(fd, EV_SYN, SYN_REPORT, 0);
+   emit(fd, EV_KEY, BTN_THUMBR, state.rSBtn);
+   emit(fd, EV_SYN, SYN_REPORT, 0);
+   emit(fd, EV_KEY, BTN_THUMBL, state.lSBtn);
+   emit(fd, EV_SYN, SYN_REPORT, 0);
+   emit(fd, EV_KEY, BTN_SELECT, state.btnSel);
+   emit(fd, EV_SYN, SYN_REPORT, 0);
+   emit(fd, EV_KEY, BTN_START, state.btnSta);
+   emit(fd, EV_SYN, SYN_REPORT, 0);
+   emit(fd, EV_KEY, BTN_MODE, state.btnMen);
+   emit(fd, EV_SYN, SYN_REPORT, 0);
+   emit(fd, EV_KEY, BTN_DPAD_DOWN, state.dDp);
+   emit(fd, EV_SYN, SYN_REPORT, 0);
+   emit(fd, EV_KEY, BTN_DPAD_LEFT, state.lDP);
+   emit(fd, EV_SYN, SYN_REPORT, 0);
+   emit(fd, EV_KEY, BTN_DPAD_RIGHT, state.rDP);
+   emit(fd, EV_SYN, SYN_REPORT, 0);
+   emit(fd, EV_KEY, BTN_DPAD_UP, state.uDP);
+   emit(fd, EV_SYN, SYN_REPORT, 0);
+
+   printf("lstkx: %f\n", state.lStkX);
+   emit(fd, EV_ABS, ABS_X, state.lStkX);
+   emit(fd, EV_SYN, SYN_REPORT, 0);
+   emit(fd, EV_ABS, ABS_Y, state.lStkY);
+   emit(fd, EV_SYN, SYN_REPORT, 0);
+   emit(fd, EV_ABS, ABS_RX, state.rStkX);
+   emit(fd, EV_SYN, SYN_REPORT, 0);
+   emit(fd, EV_ABS, ABS_RY, state.rStkY);
+   emit(fd, EV_SYN, SYN_REPORT, 0);
 
 }
 
@@ -96,6 +129,9 @@ void createDevice()
    BTN_DPAD_DOWN,
    BTN_DPAD_LEFT,
    BTN_DPAD_RIGHT,
+   BTN_SELECT,
+   BTN_START,
+   BTN_MODE,
    BTN_TR,      //Binary RTrigger
    BTN_TL,      //Binary LTrigger
    BTN_TR2,      //Binary Lower RTrigger

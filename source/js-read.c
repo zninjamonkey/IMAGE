@@ -176,6 +176,7 @@ void handle_event(struct js_event e)
             {
                 case INP_LEFT_X_AXIS:
                     gpad_state.lStkX = e.value;
+                    // printf("lstkx: %f\n", gpad_state.lStkX);
                     break;
                 case INP_LEFT_Y_AXIS:
                     gpad_state.lStkY = e.value;
@@ -211,13 +212,17 @@ void main()
     int fd = open("/dev/input/js0", O_NONBLOCK);
     struct js_event e;
 
+    createDevice();
+
     while (1)
     {
         while(read(fd, &e, sizeof(e)) > 0) {
             handle_event(e);
         }
 
-        printf("%d\n", gpad_state.btnX);
+        // printf("%d\n", gpad_state.btnX);
+
+        applyInputState(gpad_state);
         // handle_event(e);
         // int wtffff = read(fd, &e, sizeof(e));
 
@@ -228,4 +233,6 @@ void main()
         // printf("type: %d\n",e.type);
         usleep(1*1000);
     }
+
+    cleanUp(); // I don't think this will ever run lol
 }
