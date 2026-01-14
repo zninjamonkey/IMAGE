@@ -159,8 +159,11 @@ void createDevice()
    }
 
    struct uinput_setup usetup;
-   struct uinput_abs_setup uabssetup;
-   struct input_absinfo absxinfo;
+   struct uinput_abs_setup uabs_setup_lx;
+   struct uinput_abs_setup uabs_setup_ly;
+   struct uinput_abs_setup uabs_setup_rx;
+   struct uinput_abs_setup uabs_setup_ry;
+   struct input_absinfo absinfo;
 
    memset(&usetup, 0, sizeof(usetup));
    usetup.id.bustype = BUS_USB;
@@ -168,16 +171,31 @@ void createDevice()
    usetup.id.product = 0x5678; /* sample product */
    strcpy(usetup.name, "Generic Virtual Gamepad");
 
-   memset(&uabssetup, 0, sizeof(uabssetup));
-   memset(&absxinfo, 0, sizeof(absxinfo));
-   absxinfo.minimum = -32767;
-   absxinfo.maximum = 32767;
+   memset(&uabs_setup_lx, 0, sizeof(uabs_setup_lx));
+   memset(&absinfo, 0, sizeof(absinfo));
+   absinfo.minimum = -32767;
+   absinfo.maximum = 32767;
    // absxinfo.resolution
-   uabssetup.absinfo = absxinfo;
-   uabssetup.code = ABS_X;
+
+   uabs_setup_lx.absinfo = absinfo;
+   uabs_setup_lx.code = ABS_X;
+
+   uabs_setup_ly.absinfo = absinfo;
+   uabs_setup_ly.code = ABS_Y;
+
+   uabs_setup_rx.absinfo = absinfo;
+   uabs_setup_rx.code = ABS_RX;
+
+   uabs_setup_ry.absinfo = absinfo;
+   uabs_setup_ry.code = ABS_RY;
 
    ioctl(fd, UI_DEV_SETUP, &usetup);
-   ioctl(fd, UI_ABS_SETUP, &uabssetup);
+
+   ioctl(fd, UI_ABS_SETUP, &uabs_setup_lx);
+   ioctl(fd, UI_ABS_SETUP, &uabs_setup_ly);
+   ioctl(fd, UI_ABS_SETUP, &uabs_setup_rx);
+   ioctl(fd, UI_ABS_SETUP, &uabs_setup_ry);
+
    ioctl(fd, UI_DEV_CREATE);
 
    struct GamepadStatus gPadState;
