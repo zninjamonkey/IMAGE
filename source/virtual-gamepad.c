@@ -112,10 +112,7 @@ void applyInputState(struct GamepadStatus state)
 
 void createDevice()
 {
-   struct uinput_setup usetup;
-
    fd = open("/dev/uinput", O_WRONLY | O_NONBLOCK);
-
 
    int btn_codes[] = 
    {
@@ -161,13 +158,26 @@ void createDevice()
       ioctl(fd, UI_SET_ABSBIT, axis_codes[i]);
    }
 
+   struct uinput_setup usetup;
+   struct uinput_abs_setup uabssetup;
+   struct input_absinfo absxinfo;
+
    memset(&usetup, 0, sizeof(usetup));
    usetup.id.bustype = BUS_USB;
    usetup.id.vendor = 0x1234; /* sample vendor */
    usetup.id.product = 0x5678; /* sample product */
    strcpy(usetup.name, "Generic Virtual Gamepad");
 
+   memset(&uabssetup, 0, sizeof(uabssetup));
+   memset(&absxinfo, 0, sizeof(absxinfo));
+   absxinfo.minimum = -32767;
+   absxinfo.maximum = 32767;
+   // absxinfo.resolution
+   uabssetup.absinfo = absxinfo;
+   uabssetup.code = ABS_X;
+
    ioctl(fd, UI_DEV_SETUP, &usetup);
+   ioctl(fd, UI_ABS_SETUP, &uabssetup);
    ioctl(fd, UI_DEV_CREATE);
 
    struct GamepadStatus gPadState;
