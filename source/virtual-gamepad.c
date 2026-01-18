@@ -107,6 +107,10 @@ void applyInputState(struct GamepadStatus state)
    emit(fd, EV_SYN, SYN_REPORT, 0);
    emit(fd, EV_ABS, ABS_RY, (int)state.rStkY);
    emit(fd, EV_SYN, SYN_REPORT, 0);
+   emit(fd, EV_ABS, ABS_HAT1X, (int)state.rTrig);
+   emit(fd, EV_SYN, SYN_REPORT, 0);
+   emit(fd, EV_ABS, ABS_HAT1Y, (int)state.lTrig);
+   emit(fd, EV_SYN, SYN_REPORT, 0);
 
 }
 
@@ -163,6 +167,9 @@ void createDevice()
    struct uinput_abs_setup uabs_setup_ly;
    struct uinput_abs_setup uabs_setup_rx;
    struct uinput_abs_setup uabs_setup_ry;
+   struct uinput_abs_setup uabs_setup_trigr;
+   struct uinput_abs_setup uabs_setup_trigl;
+
    struct input_absinfo absinfo;
 
    memset(&usetup, 0, sizeof(usetup));
@@ -189,12 +196,20 @@ void createDevice()
    uabs_setup_ry.absinfo = absinfo;
    uabs_setup_ry.code = ABS_RY;
 
+   uabs_setup_trigl.absinfo = absinfo;
+   uabs_setup_trigl.code = ABS_HAT1Y;
+
+   uabs_setup_trigr.absinfo = absinfo;
+   uabs_setup_trigr.code = ABS_HAT1X;
+
    ioctl(fd, UI_DEV_SETUP, &usetup);
 
    ioctl(fd, UI_ABS_SETUP, &uabs_setup_lx);
    ioctl(fd, UI_ABS_SETUP, &uabs_setup_ly);
    ioctl(fd, UI_ABS_SETUP, &uabs_setup_rx);
    ioctl(fd, UI_ABS_SETUP, &uabs_setup_ry);
+   ioctl(fd, UI_ABS_SETUP, &uabs_setup_trigl);
+   ioctl(fd, UI_ABS_SETUP, &uabs_setup_trigr);
 
    ioctl(fd, UI_DEV_CREATE);
 
