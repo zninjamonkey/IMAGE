@@ -168,10 +168,10 @@ void handle_event(struct js_event e)
                     gpad_state.lSBtn = e.value;
                     break;
             }
-
+            break;
         case JS_EVENT_AXIS:
-    
-            // printf("axis: %d\n", e.number);
+   
+            printf("axis: %d\n", e.number);
             switch(e.number)
             {
                 case INP_LEFT_X_AXIS:

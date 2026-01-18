@@ -98,7 +98,7 @@ void applyInputState(struct GamepadStatus state)
    emit(fd, EV_KEY, BTN_DPAD_UP, state.uDP);
    emit(fd, EV_SYN, SYN_REPORT, 0);
 
-   printf("lstkx: %f\n", state.lStkX);
+   // printf("lstkx: %f\n", state.lStkX);
    emit(fd, EV_ABS, ABS_X, (int)state.lStkX);
    emit(fd, EV_SYN, SYN_REPORT, 0);
    emit(fd, EV_ABS, ABS_Y, (int)state.lStkY);
