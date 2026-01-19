@@ -79,9 +79,9 @@ void applyInputState(struct GamepadStatus state)
    emit(fd, EV_SYN, SYN_REPORT, 0);
    emit(fd, EV_KEY, BTN_TR2, state.rBump);
    emit(fd, EV_SYN, SYN_REPORT, 0);
-   emit(fd, EV_KEY, BTN_TL, state.lTrig > -32767);
+   emit(fd, EV_KEY, BTN_TL, state.lBtn);
    emit(fd, EV_SYN, SYN_REPORT, 0);
-   emit(fd, EV_KEY, BTN_TR, state.rTrig > -32767);
+   emit(fd, EV_KEY, BTN_TR, state.rBtn);
    emit(fd, EV_SYN, SYN_REPORT, 0);
    emit(fd, EV_KEY, BTN_THUMBR, state.rSBtn);
    emit(fd, EV_SYN, SYN_REPORT, 0);

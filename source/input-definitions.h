@@ -9,6 +9,9 @@
 #define INP_RIGHT_BUMPER    7
 #define INP_LEFT_BUMPER     6
 
+#define INP_RIGHT_TRIGGER_BINARY 9
+#define INP_LEFT_TRIGGER_BINARY  8
+
 #define INP_SELECT          10
 #define INP_START           11
 #define INP_MENU            12

@@ -167,6 +167,12 @@ void handle_event(struct js_event e)
                 case INP_LEFT_STICK:
                     gpad_state.lSBtn = e.value;
                     break;
+                case INP_LEFT_TRIGGER_BINARY:
+                    gpad_state.lBtn = e.value;
+                    break;
+                case INP_RIGHT_TRIGGER_BINARY:
+                    gpad_state.rBtn = e.value;
+                    break;
             }
             break;
         case JS_EVENT_AXIS:
