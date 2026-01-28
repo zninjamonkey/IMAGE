@@ -67,6 +67,7 @@ void emit(int fd, int type, int code, int val)
 
 void applyInputState(struct GamepadStatus state)
 {
+   // printf("applying input!!\n");
    emit(fd, EV_KEY, BTN_SOUTH, state.btnA);
    emit(fd, EV_SYN, SYN_REPORT, 0);
    emit(fd, EV_KEY, BTN_EAST, state.btnB);
@@ -122,6 +123,11 @@ void createDevice()
 {
    fd = open("/dev/uinput", O_WRONLY | O_NONBLOCK);
 
+   if (fd < 0)
+   {
+       printf("error opening uinput, fd: %d\n", fd);
+   }
+   
    int btn_codes[] = 
    {
    BTN_SOUTH,      //A
