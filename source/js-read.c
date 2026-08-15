@@ -215,7 +215,31 @@ void handle_event(struct js_event e)
 
 int main()
 {
-    int fd = open("/dev/input/js0", O_NONBLOCK);
+
+    int uncheckedJoysticks = 1;
+    int counter = 0;
+    while (uncheckedJoysticks){
+
+        char test_file_name[50];
+        sprintf(test_file_name, "/dev/input/js%d", counter);
+        printf(test_file_name);
+        FILE * test;
+        test = fopen(test_file_name, "r");
+        if (test != NULL) {
+            fclose(test);
+            uncheckedJoysticks = 0;
+        }
+        counter ++;
+    }
+
+    printf("enter a event device number to use: ");
+    int device_num;
+    scanf("%d", &device_num);
+
+    char device_path[50];
+    sprintf(device_path, "/dev/input/js%d", device_num);
+    printf(device_path);
+    int fd = open(device_path, O_NONBLOCK);
     struct js_event e;
 
     createDevice();

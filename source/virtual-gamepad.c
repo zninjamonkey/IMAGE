@@ -69,52 +69,54 @@ void applyInputState(struct GamepadStatus state)
 {
    // printf("applying input!!\n");
    emit(fd, EV_KEY, BTN_SOUTH, state.btnA);
-   emit(fd, EV_SYN, SYN_REPORT, 0);
+   // emit(fd, EV_SYN, SYN_REPORT, 0);
    emit(fd, EV_KEY, BTN_EAST, state.btnB);
-   emit(fd, EV_SYN, SYN_REPORT, 0);
+   // emit(fd, EV_SYN, SYN_REPORT, 0);
    emit(fd, EV_KEY, BTN_NORTH, state.btnY);
-   emit(fd, EV_SYN, SYN_REPORT, 0);
+   // emit(fd, EV_SYN, SYN_REPORT, 0);
    emit(fd, EV_KEY, BTN_WEST, state.btnX);
-   emit(fd, EV_SYN, SYN_REPORT, 0);
+   // emit(fd, EV_SYN, SYN_REPORT, 0);
    emit(fd, EV_KEY, BTN_TL2, state.lBump);
-   emit(fd, EV_SYN, SYN_REPORT, 0);
+   // emit(fd, EV_SYN, SYN_REPORT, 0);
    emit(fd, EV_KEY, BTN_TR2, state.rBump);
-   emit(fd, EV_SYN, SYN_REPORT, 0);
+   // emit(fd, EV_SYN, SYN_REPORT, 0);
    emit(fd, EV_KEY, BTN_TL, state.lBtn);
-   emit(fd, EV_SYN, SYN_REPORT, 0);
+   // emit(fd, EV_SYN, SYN_REPORT, 0);
    emit(fd, EV_KEY, BTN_TR, state.rBtn);
-   emit(fd, EV_SYN, SYN_REPORT, 0);
+   // emit(fd, EV_SYN, SYN_REPORT, 0);
    emit(fd, EV_KEY, BTN_THUMBR, state.rSBtn);
-   emit(fd, EV_SYN, SYN_REPORT, 0);
+   // emit(fd, EV_SYN, SYN_REPORT, 0);
    emit(fd, EV_KEY, BTN_THUMBL, state.lSBtn);
-   emit(fd, EV_SYN, SYN_REPORT, 0);
+   // emit(fd, EV_SYN, SYN_REPORT, 0);
    emit(fd, EV_KEY, BTN_SELECT, state.btnSel);
-   emit(fd, EV_SYN, SYN_REPORT, 0);
+   // emit(fd, EV_SYN, SYN_REPORT, 0);
    emit(fd, EV_KEY, BTN_START, state.btnSta);
-   emit(fd, EV_SYN, SYN_REPORT, 0);
+   // emit(fd, EV_SYN, SYN_REPORT, 0);
    emit(fd, EV_KEY, BTN_MODE, state.btnMen);
-   emit(fd, EV_SYN, SYN_REPORT, 0);
+   // emit(fd, EV_SYN, SYN_REPORT, 0);
    emit(fd, EV_KEY, BTN_DPAD_DOWN, state.dDp);
-   emit(fd, EV_SYN, SYN_REPORT, 0);
+   // emit(fd, EV_SYN, SYN_REPORT, 0);
    emit(fd, EV_KEY, BTN_DPAD_LEFT, state.lDP);
-   emit(fd, EV_SYN, SYN_REPORT, 0);
+   // emit(fd, EV_SYN, SYN_REPORT, 0);
    emit(fd, EV_KEY, BTN_DPAD_RIGHT, state.rDP);
-   emit(fd, EV_SYN, SYN_REPORT, 0);
+   // emit(fd, EV_SYN, SYN_REPORT, 0);
    emit(fd, EV_KEY, BTN_DPAD_UP, state.uDP);
-   emit(fd, EV_SYN, SYN_REPORT, 0);
+   // emit(fd, EV_SYN, SYN_REPORT, 0);
 
    // printf("lstkx: %f\n", state.lStkX);
    emit(fd, EV_ABS, ABS_X, (int)state.lStkX);
-   emit(fd, EV_SYN, SYN_REPORT, 0);
+   // emit(fd, EV_SYN, SYN_REPORT, 0);
    emit(fd, EV_ABS, ABS_Y, (int)state.lStkY);
-   emit(fd, EV_SYN, SYN_REPORT, 0);
+   // emit(fd, EV_SYN, SYN_REPORT, 0);
    emit(fd, EV_ABS, ABS_RX, (int)state.rStkX);
-   emit(fd, EV_SYN, SYN_REPORT, 0);
+   // emit(fd, EV_SYN, SYN_REPORT, 0);
    emit(fd, EV_ABS, ABS_RY, (int)state.rStkY);
-   emit(fd, EV_SYN, SYN_REPORT, 0);
+   // emit(fd, EV_SYN, SYN_REPORT, 0);
    emit(fd, EV_ABS, ABS_HAT1X, (int)state.rTrig);
-   emit(fd, EV_SYN, SYN_REPORT, 0);
+   // emit(fd, EV_SYN, SYN_REPORT, 0);
    emit(fd, EV_ABS, ABS_HAT1Y, (int)state.lTrig);
+
+
    emit(fd, EV_SYN, SYN_REPORT, 0);
 
 }
@@ -186,13 +188,14 @@ void createDevice()
    usetup.id.bustype = BUS_USB;
    usetup.id.vendor = 0x1234; /* sample vendor */
    usetup.id.product = 0x5678; /* sample product */
-   strcpy(usetup.name, "Generic Virtual Gamepad");
+   strcpy(usetup.name, "IMAGE Gamepad");
 
    memset(&uabs_setup_lx, 0, sizeof(uabs_setup_lx));
    memset(&absinfo, 0, sizeof(absinfo));
    absinfo.minimum = -32767;
    absinfo.maximum = 32767;
-   // absxinfo.resolution
+   absinfo.flat = 0;
+   absinfo.fuzz = 0;
 
    uabs_setup_lx.absinfo = absinfo;
    uabs_setup_lx.code = ABS_X;
