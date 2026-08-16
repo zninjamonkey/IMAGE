@@ -1,7 +1,9 @@
 import evdev
+import evdev.ecodes as codes
+
 import csv
 
-import virtual-gamepad
+import virtual_gamepad
 
 
 input_definitions_csv = open('./input-definitions.csv', 'r')
@@ -17,7 +19,7 @@ print(device)
 def handle_input(event):
     global input_definitions
 
-    if event.type == evdev.ecodes.EV_KEY or event.type == evdev.ecodes.EV_ABS:
+    if event.type == codes.EV_KEY or event.type == codes.EV_ABS:
         # print(event.code)
         # print("done")
 
@@ -25,17 +27,24 @@ def handle_input(event):
         #     print(event.value)
 
         if event.code == int(input_definitions[0][1]):
+            virtual_gamepad.set_button_state(codes.BTN_SOUTH, event.value)
             print("A button pressed")
         elif event.code == int(input_definitions[1][1]):
+            virtual_gamepad.set_button_state(codes.BTN_EAST, event.value)
             print("B button pressed")
         elif event.code == int(input_definitions[2][1]):
+            virtual_gamepad.set_button_state(codes.BTN_WEST, event.value)
             print("X button pressed")
         elif event.code == int(input_definitions[3][1]):
+            virtual_gamepad.set_button_state(codes.BTN_NORTH, event.value)
             print("Y button pressed")
         elif event.code == int(input_definitions[4][1]):
+            virtual_gamepad.set_button_state(codes.BTN_TR, event.value)
             print("right bumper pressed")
         elif event.code == int(input_definitions[5][1]):
+            virtual_gamepad.set_button_state(codes.BTN_TL, event.value)
             print("left bumper pressed")
+
         # elif event.code == int(input_definitions[3][1]):
         #     print("Y button pressed")
         # elif event.code == int(input_definitions[3][1]):
@@ -44,11 +53,13 @@ def handle_input(event):
         #     print("Y button pressed")
         # elif event.code == int(input_definitions[3][1]):
         #     print("Y button pressed")
-        # elif event.code == int(input_definitions[3][1]):
-        #     print("Y button pressed")
-        # elif event.code == int(input_definitions[3][1]):
-        #     print("Y button pressed")
-        
+
+        elif event.code == int(input_definitions[15][1]):
+            # print("dude common")
+            virtual_gamepad.set_axis_state(codes.ABS_X, event.value)
+        elif event.code == int(input_definitions[16][1]):
+            virtual_gamepad.set_axis_state(codes.ABS_Y, event.value)
+
 
 for event in device.read_loop():
 
