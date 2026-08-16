@@ -30,7 +30,9 @@ events = {
 
 uinput = evdev.UInput(events, "IMAGE Virtual Gamepad")
 
-
+def set_button_state(button, value):
+    uinput.write(codes.EV_KEY, button, value)
+    uinput.syn()
 
 # uinput.write(codes.EV_KEY, codes.BTN_SOUTH, 1)
 # uinput.syn()

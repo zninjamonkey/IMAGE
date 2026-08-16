@@ -1,6 +1,8 @@
 import evdev
 import csv
 
+import virtual-gamepad
+
 
 input_definitions_csv = open('./input-definitions.csv', 'r')
 reader = csv.reader(input_definitions_csv)
