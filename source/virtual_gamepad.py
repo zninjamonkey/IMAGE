@@ -24,8 +24,10 @@ events = {
                     (codes.ABS_Y, evdev.AbsInfo(value=0, min=0, max=32767*2, fuzz=0, flat=0, resolution=0)),
                     (codes.ABS_RX, evdev.AbsInfo(value=0, min=0, max=32767*2, fuzz=0, flat=0, resolution=0)),
                     (codes.ABS_RY, evdev.AbsInfo(value=0, min=0, max=32767*2, fuzz=0, flat=0, resolution=0)),
-                    (codes.ABS_HAT1X, evdev.AbsInfo(value=0, min=0, max=1020, fuzz=0, flat=0, resolution=0)),
-                    (codes.ABS_HAT1Y, evdev.AbsInfo(value=0, min=0, max=1020, fuzz=0, flat=0, resolution=0))
+                    (codes.ABS_HAT1X, evdev.AbsInfo(value=0, min=0, max=1028, fuzz=0, flat=0, resolution=0)),
+                    (codes.ABS_HAT1Y, evdev.AbsInfo(value=0, min=0, max=1028, fuzz=0, flat=0, resolution=0)),
+                    (codes.ABS_HAT0X, evdev.AbsInfo(value=0, min=-1, max=1, fuzz=0, flat=0, resolution=0)),
+                    (codes.ABS_HAT0Y, evdev.AbsInfo(value=0, min=-1, max=1, fuzz=0, flat=0, resolution=0))
                     ]
 }
 
